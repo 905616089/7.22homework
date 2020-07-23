@@ -19,7 +19,6 @@ var divs = [];
 var speed = 5;
 var num = 3;
 
-
 function craetword(num, speed) {
     for (var i = 0; i < num; i++) {
 
@@ -32,18 +31,24 @@ function craetword(num, speed) {
 
         container.appendChild(wordDiv);
         divs.push(wordDiv);
+       
 
     }
     console.log(divs);
     function clearword(speed) {
-        for (var x = 0; x < divs.length; x++) {
-
+        for (var x = 0; x < divs.length; x++) {   
+            if (over < 0 || over == 0) {
+                clearInterval(t);
+            }
+            console.log(over);
             divs[x].style.top = divs[x].offsetTop + speed + "px";
             if (divs[x].offsetTop > 650) {
                 divs[x].style.display = "none";
                 over = over - 1;
                 speed = speed + 0.1;
+                divs.splice(x, 1);
                 clearInterval(t)
+             
                 craetword(1, speed);
                 span2.innerHTML = over;
                 console.log(over);
@@ -53,9 +58,8 @@ function craetword(num, speed) {
                     alert("游戏结束,您的得分为" + value);
                     black.innerHTML = "";
                     container.innerHTML = "";
-                    over = 3;
                     value = 0;
-                    divs.splice(0, divs.length);
+                    divs.splice(x, 1);
                     span2.innerHTML = over;
                     span1.innerHTML = value;
                     return;
@@ -72,6 +76,7 @@ function craetword(num, speed) {
                     container.removeChild(divs[i]);
                     divs.splice(i, 1);
                     clearInterval(t);
+                    
                     speed = speed + 0.1;
                     craetword(1, speed);
                     break;
@@ -80,7 +85,6 @@ function craetword(num, speed) {
         }
     }
     var t = setInterval(clearword, 50, speed);
-
 }
 
 
@@ -156,7 +160,11 @@ function guanka(num, speed, g,sum) {
     }
     console.log(divs);
     function clearwd(speed) {
+    
         for (var x = 0; x < divs.length; x++) {
+            if (over < 0 || over == 0) {
+                clearInterval(t);
+            }
             divs[x].style.top = divs[x].offsetTop + speed + "px";
             if (divs[x].offsetTop > 650) {
                 divs[x].style.display = "none";
@@ -226,12 +234,17 @@ function guanka(num, speed, g,sum) {
 
 
 begin.onclick = function () {
-    
-    if (isNaN(speed) ||isNaN(num)) {
+    over=3;
+    divs.splice(0,divs.length);
+    span2.innerHTML=over;
+   if (isNaN(speed) &&isNaN(num)) {
+        console.log("关卡")
         num=2;speed=3;
         console.log(num, speed,g,sum);
         levebeg(num, speed, g,sum)
     } else {
+        console.log("普通")
+        console.log(speed);
         beg(num, speed);
     }
 

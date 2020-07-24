@@ -137,7 +137,7 @@ function guanka(num, speed, g, sum) {
                         clearInterval(t)
                         black.innerHTML = "";
                         container.innerHTML = "";
-                        value = 0;
+                        
                         num = "a";
                         speed = "a";
                         divs.splice(x, 1);
@@ -145,6 +145,7 @@ function guanka(num, speed, g, sum) {
                         span2.innerHTML = over;
                         span1.innerHTML = value;
                         alert("游戏结束,您的得分为" + value);
+                        value = 0;
                         return;
                     }
                 }
